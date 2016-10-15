@@ -8,8 +8,10 @@
 @(module orig racket/base
    (require scribble/manual
             (for-label racket/base))
-   (provide orig:map)
-   (define orig:map @racket[map]))
+   (provide orig:map orig:foldl orig:foldr)
+   (define orig:map @racket[map])
+   (define orig:foldl @racket[foldl])
+   (define orig:foldr @racket[foldr]))
 @(require 'orig)
 
 @defmodule[typed-map]
@@ -76,3 +78,35 @@
    result of calling @racket[f] on any element has the same type, therefore the
    accumulator has the type @racket[(Listof B)], where @racket[B] is the
    inferred type of the result of @racket[f].}]}
+
+
+@defproc[#:kind "syntax"
+         (foldl [f (→ A ... Acc Acc)] [init Acc] [l (Listof A)] ...) Acc]{
+ Like @orig:foldl from @racketmodname[typed/racket/base] but with better type
+ inference for Typed Racket.
+
+ This form is implemented in the same way as the overloaded version of
+ @racket[map] presented above.
+
+ Note that in some cases, the type for the accumulator is not generalised
+ enough based on the result of the first iteration, in which cases annotations
+ are needed:
+
+ @examples[#:eval ((make-eval-factory '(typed-map) #:lang 'typed/racket))
+           (eval:error (foldl (λ (x acc) (cons acc (add1 x))) '() '(1 2 3)))
+           (foldl (λ (x [acc : (Rec R (U Null (Pairof R Positive-Index)))])
+                    (cons acc (add1 x)))
+                  '()
+                  '(1 2 3))]}
+
+@defproc[#:kind "syntax"
+         (foldr [f (→ A ... Acc Acc)] [init Acc] [l (Listof A)] ...) Acc]{
+ Like @orig:foldr from @racketmodname[typed/racket/base] but with better type
+ inference for Typed Racket.
+
+ This form is implemented in the same way as the overloaded version of
+ @racket[map] presented above.
+
+ Note that in some cases, the type for the accumulator is not generalised
+ enough based on the result of the first iteration, in which cases annotations
+ are needed. See the example given for @racket[foldl].}
