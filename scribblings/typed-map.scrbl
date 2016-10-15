@@ -16,7 +16,8 @@
 
 @defproc[#:kind "syntax"
          (map [f (→ A ... B)] [l (Listof A)] ...) (Listof B)]{
- Like @orig:map, but with better type inference for Typed Racket.
+ Like @orig:map from @racketmodname[typed/racket/base], but with better type
+ inference for Typed Racket.
  
  When @racket[f] is a literal lambda of the form
  @racket[(λ (arg ...) body ...)], it is not necessary to specify the type of
@@ -27,8 +28,8 @@
            (let ([l '(4 5 6)])
              (map (λ (x) (* x 2)) l))]
 
- This enables the use of @racket[#,hash-lang afl] for @racket[map] in Typed
- Racket.
+ This enables the use of @racket[#,(hash-lang) #,(racketmodname afl)] for
+ @racket[map] in Typed Racket.
 
  Furthermore, when @racket[f] is a polymorphic function, type annotations are
  not needed:
@@ -44,10 +45,11 @@
                       (eval:error (map car '([a . 1] [b . 2] [c . 3]))))]
 
  When used as an identifier, the @racket[map] macro expands to the original
- @orig:map from @racketmodname[racket/base]:
+ @orig:map from @racketmodname[typed/racket/base]:
 
  @examples[#:eval ((make-eval-factory '(typed-map) #:lang 'typed/racket))
-           (require (only-in racket/base [map orig:map]))
+           (eval:alts (require (only-in racket/base [#,orig:map orig:map]))
+                      (require (only-in racket/base [map orig:map])))
            (equal? map orig:map)]
 
  Note that the implementation expands to a large expression, and makes use of
@@ -60,11 +62,12 @@
    output is identical to the input. An unoptimizable guard prevents the
    double-reverse from actually being executed, so it does not incur a
    performance cost.}
- @item{It uses a named let to perform the loop the function @racket[f] is
-   never passed as an argument to another polymorphic function, and is instead
-   directly called with the appropriate arguments. The error message
-   "Polymorphic function `map' could not be applied to arguments" is therefore
-   not raised.}
+ @item{It uses a
+   @seclink["Named_let" #:doc '(lib "scribblings/guide/guide.scrbl")]{named
+    @racket[let]} to perform the loop. The function @racket[f] is never passed
+   as an argument to another polymorphic function, and is instead directly
+   called with the appropriate arguments. The error message ``Polymorphic
+   function `map' could not be applied to arguments'' is therefore not raised.}
  @item{To have the most precise and correct types, it uses a named let with a
    single variable containing the list (with the generalized type). An outer let
    binds a mutable accumulator, initialized with a single-element list

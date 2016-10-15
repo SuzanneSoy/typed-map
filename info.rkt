@@ -5,7 +5,8 @@
                "typed-racket-lib"))
 (define build-deps '("scribble-lib"
                      "racket-doc"
-                     "afl"))
+                     "afl"
+                     "typed-racket-doc"))
 (define scribblings '(("scribblings/typed-map.scrbl" ())))
 (define pkg-desc
   (string-append "Type inference helper for map with Typed/Racket."
