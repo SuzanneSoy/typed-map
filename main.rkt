@@ -2,7 +2,7 @@
 
 (require (only-in racket/base [map orig-map]))
 
-(provide map generalize)
+(provide map)
 
 (module m racket/base
   (provide unoptimizable-false)
