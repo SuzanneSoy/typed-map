@@ -6,7 +6,7 @@
                "typed-racket-more"))
 (define build-deps '("scribble-lib"
                      "racket-doc"
-                     "afl"
+                     "aful"
                      "typed-racket-doc"))
 (define scribblings '(("scribblings/typed-map.scrbl" ())))
 (define pkg-desc
