@@ -28,19 +28,22 @@
   (void))
 
 ;; with ann
-(ann (map (λ (x) (* x 2)) '()) Null)
-(ann (map (λ (x) (* x 2)) '(1)) (Listof Positive-Byte))
-(ann (map (λ (x) (* x 2)) '(1 2)) (Listof Positive-Index))
-(ann (map (λ (x) (* x 2)) '(1 2 3)) (Listof Positive-Index))
-(ann (map + '(1 2 3) '(4 5 6)) (Listof Positive-Index))
-(ann (map car '((1 2) (3 4))) (Listof Positive-Byte))
-(ann (map #λ(+ % 1) '(1 2 3)) (Listof Positive-Index))
+(let ()
+  (ann (map (λ (x) (* x 2)) '()) Null)
+  (ann (map (λ (x) (* x 2)) '(1)) (Listof Positive-Byte))
+  (ann (map (λ (x) (* x 2)) '(1 2)) (Listof Positive-Index))
+  (ann (map (λ (x) (* x 2)) '(1 2 3)) (Listof Positive-Index))
+  (ann (map + '(1 2 3) '(4 5 6)) (Listof Positive-Index))
+  (ann (map car '((1 2) (3 4))) (Listof Positive-Byte))
+  (ann (map #λ(+ % 1) '(1 2 3)) (Listof Positive-Index))
 
-(ann (map (λ (x) (define y x) (+ y 1)) '(1 2 3)) (Listof Positive-Index))
+  (ann (map (λ (x) (define y x) (+ y 1)) '(1 2 3)) (Listof Positive-Index))
 
-(ann (λ #:∀ (A) ([l : (Listof A)])
-       (map (λ (x) x) l))
-     (∀ (A) (→ (Listof A) (Listof A))))
+  (ann (λ #:∀ (A) ([l : (Listof A)])
+         (map (λ (x) x) l))
+       (∀ (A) (→ (Listof A) (Listof A))))
+
+  (void))
 
 ;; with check-equal?
 (check-equal? (map (λ (x) (* x 2)) '()) '())
@@ -98,11 +101,12 @@
 ;; Does not work because the inferred type changes between the first and the
 ;; second iteration
 #;(check-equal? (foldl (λ (x acc) (cons acc (add1 x))) '() '(1 2 3))
-                '(4 (3 (2))))
-(foldl (λ (x [acc : (Rec R (U Null (Pairof R Positive-Index)))])
-         (cons acc (add1 x)))
-       '()
-       '(1 2 3))
+                '(((() . 4) . 3) . 2))
+(check-equal? (foldl (λ (x [acc : (Rec R (U Null (Pairof R Positive-Index)))])
+                       (cons acc (add1 x)))
+                     '()
+                     '(1 2 3))
+              '(((() . 4) . 3) . 2))
 
 (let ()
   (ann (foldl (λ (x acc) (cons (add1 x) acc)) '() '()) Null)
