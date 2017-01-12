@@ -30,7 +30,7 @@
            (let ([l '(4 5 6)])
              (map (λ (x) (* x 2)) l))]
 
- This enables the use of @racket[#,(hash-lang) #,(racketmodname afl)] for
+ This enables the use of @racket[#,(hash-lang) #,(racketmodname aful)] for
  @racket[map] in Typed Racket.
 
  Furthermore, when @racket[f] is a polymorphic function, type annotations are

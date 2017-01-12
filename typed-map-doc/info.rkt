@@ -1,16 +1,13 @@
 #lang info
 (define collection "typed-map")
-(define deps '("base"
-               "rackunit-lib"
-               "typed-racket-lib"
-               "typed-racket-more"))
+(define deps '("base"))
 (define build-deps '("scribble-lib"
                      "racket-doc"
-                     "aful"
                      "typed-racket-doc"))
 (define scribblings '(("scribblings/typed-map.scrbl" ())))
 (define pkg-desc
-  (string-append "Type inference helper for map with Typed/Racket."
+  (string-append "Documentation for typed-map-lib, a"
+                 " type inference helper for map with Typed/Racket."
                  " Supports afl, un-annotated lambdas and polymorphic"
                  " functions."))
 (define version "1.0")
