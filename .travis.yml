@@ -28,7 +28,7 @@ env:
     - RACKET_VERSION=6.4
     - RACKET_VERSION=6.5
     - RACKET_VERSION=6.6
-    #- RACKET_VERSION=6.7 # Not yet
+    - RACKET_VERSION=6.7
     - RACKET_VERSION=HEAD
 
 matrix:
@@ -42,7 +42,7 @@ before_install:
 - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
 
 install:
- - raco pkg install --deps search-auto
+ - raco pkg install -j 1 --deps search-auto
 
 before_script:
 
@@ -53,7 +53,7 @@ script:
  - raco test -p typed-map
  - raco setup --check-pkg-deps --pkgs typed-map
  - raco pkg install --deps search-auto doc-coverage
- - if test "$RACKET_VERSION" != "6.2" -a "$RACKET_VERSION" != "6.3"; then raco doc-coverage typed-map; fi
+ - raco doc-coverage typed-map
 
 after_success:
  - raco pkg install --deps search-auto cover cover-coveralls
