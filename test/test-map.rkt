@@ -93,7 +93,7 @@
 
 ;; Test internal definitions inside the body
 (check-equal? (foldl (λ (x acc) (define y x) (cons (add1 y) acc)) '() '(1 2 3))
-              '(2 3 4))
+              '(4 3 2))
 
 ;; Does not work because the inferred type changes between the first and the
 ;; second iteration
