@@ -1,5 +1,5 @@
 #lang info
-(define collection "typed-map")
+(define collection 'multi)
 (define deps '("base"
                "typed-racket-lib"))
 (define build-deps '())
