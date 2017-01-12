@@ -50,7 +50,7 @@ before_script:
 # `raco pkg install --deps search-auto` to install any required
 # packages without it getting stuck on a confirmation prompt.
 script:
- - raco test -x -p typed-map
+ - raco test -p typed-map
  - raco setup --check-pkg-deps --pkgs typed-map
  - raco pkg install --deps search-auto doc-coverage
  - if test "$RACKET_VERSION" != "6.2" -a "$RACKET_VERSION" != "6.3"; then raco doc-coverage typed-map; fi

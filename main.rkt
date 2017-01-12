@@ -27,7 +27,7 @@
     [self (identifier? #'self) #'orig-map]
     [(_ (λ (argᵢ ...) body ...) lᵢ ...)
      (andmap identifier? (syntax->list #'(argᵢ ...)))
-     #'(foldr (λ (argᵢ ... acc) (cons (begin body ...) acc)) null lᵢ ...)]
+     #'(foldr (λ (argᵢ ... acc) (cons (let () body ...) acc)) null lᵢ ...)]
     [(_ f lᵢ ...)
      (with-syntax ([(argᵢ ...) (generate-temporaries #'(lᵢ ...))])
        #'(foldr (λ (argᵢ ... acc) (cons (f argᵢ ...) acc)) null lᵢ ...))]))
