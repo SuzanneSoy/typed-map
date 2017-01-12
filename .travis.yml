@@ -42,7 +42,7 @@ before_install:
 - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
 
 install:
- - raco pkg install -j 1 --deps search-auto ./typed-map ./typed-map-lib ./typed-map-test
+ - raco pkg install -j 1 --deps search-auto ./typed-map ./typed-map-lib ./typed-map-test ./typed-map-doc
 
 before_script:
 
@@ -50,11 +50,11 @@ before_script:
 # `raco pkg install --deps search-auto` to install any required
 # packages without it getting stuck on a confirmation prompt.
 script:
- - raco test -p typed-map typed-map-lib typed-map-test
- - raco setup --check-pkg-deps --pkgs typed-map typed-map-lib typed-map-test
+ - raco test -p typed-map typed-map-lib typed-map-test typed-map-doc
+ - raco setup --check-pkg-deps --pkgs typed-map typed-map-lib typed-map-test typed-map-doc
  - raco pkg install --deps search-auto doc-coverage
  - raco doc-coverage typed-map
 
 after_success:
- - raco pkg install --deps search-auto cover cover-coveralls
- - raco cover -b -f coveralls -d $TRAVIS_BUILD_DIR/coverage .
+ - raco pkg install --deps search-auto cover cover-codecov
+ - raco cover -b -f codecov -d $TRAVIS_BUILD_DIR/coverage .
