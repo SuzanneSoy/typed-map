@@ -61,6 +61,7 @@ script:
  - raco pkg install -j 1 --deps search-auto typed-map
  - raco test -p typed-map typed-map-lib typed-map-test typed-map-doc
  - raco setup --check-pkg-deps --pkgs typed-map typed-map-lib typed-map-test typed-map-doc
+ - raco pkg install --deps search-auto doc-coverage
  - raco doc-coverage typed-map
  - echo
  - mv ~/.racket ~/.racket_2
