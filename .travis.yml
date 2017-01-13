@@ -57,8 +57,8 @@ script:
  - echo
  - mv ~/.racket ~/.racket_1
  - echo
- - echo "Installing the -lib -test and -doc packages from the catalog"
- - raco pkg install -j 1 --deps search-auto ./typed-map
+ - echo "Installing the package from the catalog"
+ - raco pkg install -j 1 --deps search-auto typed-map
  - raco test -p typed-map typed-map-lib typed-map-test typed-map-doc
  - raco setup --check-pkg-deps --pkgs typed-map typed-map-lib typed-map-test typed-map-doc
  - raco doc-coverage typed-map
