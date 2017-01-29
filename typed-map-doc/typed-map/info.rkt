@@ -1,2 +1,2 @@
 #lang info
-(define scribblings '(("scribblings/typed-map.scrbl" ())))
+(define scribblings '(("scribblings/typed-map.scrbl" () ("typed-racket"))))
