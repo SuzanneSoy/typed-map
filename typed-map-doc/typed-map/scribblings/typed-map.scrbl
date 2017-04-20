@@ -2,9 +2,6 @@
 @require[scribble/example
          @for-label[typed-map]]
 
-@title{typed-map}
-@author[@author+email["Georges Dupéron" "georges.duperon@gmail.com"]]
-
 @(module orig racket/base
    (require scribble/manual
             (for-label racket/base))
@@ -13,6 +10,9 @@
    (define orig:foldl @racket[foldl])
    (define orig:foldr @racket[foldr]))
 @(require 'orig)
+
+@title{Type inference helper for @orig:map}
+@author[@author+email["Georges Dupéron" "georges.duperon@gmail.com"]]
 
 @defmodule[typed-map]
 
