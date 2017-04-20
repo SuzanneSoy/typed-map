@@ -58,7 +58,7 @@
                (if (or (null? l-cacheᵢ) ...)
                    (begin
                      (unless (and (null? l-cacheᵢ) ...)
-                       ;; TODO: copy the error message from map.
+                       ;; TODO: produce the same error message as map.
                        (error "all lists must have same size"))
                      init-acc)
                    ;; Possibility to call (generalize) on the single-element
@@ -79,7 +79,7 @@
                        (if (or (null? l-loopᵢ) ...)
                            (begin
                              (unless (and (null? l-loopᵢ) ...)
-                               ;; TODO: copy the error message from foldr/map.
+                               ;; TODO: same error message as foldr or map.
                                (error "all lists must have same size"))
                              (void))
                            (begin (set! upcast-result
