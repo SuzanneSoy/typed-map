@@ -7,20 +7,9 @@
 
 (provide map foldr foldl)
 
-(module m racket/base
-  (provide unoptimizable-false)
-  (define (unoptimizable-false) #f))
-(require/typed 'm [unoptimizable-false (→ Boolean)])
-
-(define #:∀ (A) (generalize [l : (Listof A)])
-  (if (unoptimizable-false)
-      l
-      ;; the double-reverse is complex enough that Typed/Racket does not
-      ;; infer that generalize has type (→ A A) instead of
-      ;; (→ (Listof A) (Listof A))
-      ;; The unoptimizable-false above means that this is never executed,
-      ;; so the performance cost of the double-reverse is not incured.
-      (reverse (reverse l))))
+(: generalize (∀ (A) (case→ (→ Null Null)
+                            (→ (Listof A) (Listof A)))))
+(define (generalize l) l)
 
 (define-syntax (map stx)
   (syntax-case stx (λ)
@@ -30,7 +19,12 @@
      #'(foldr (λ (argᵢ ... acc) (cons (let () body ...) acc)) null lᵢ ...)]
     [(_ f lᵢ ...)
      (with-syntax ([(argᵢ ...) (generate-temporaries #'(lᵢ ...))])
-       #'(foldr (λ (argᵢ ... acc) (cons (f argᵢ ...) acc)) null lᵢ ...))]))
+       #'(let ([f-cache f])
+           (foldr (λ (argᵢ ... acc)
+                    (cons (f-cache argᵢ ...) acc))
+                  null
+                  lᵢ
+                  ...)))]))
 
 (define-syntax (foldr stx)
   (syntax-case stx (λ)
