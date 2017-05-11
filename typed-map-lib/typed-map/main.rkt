@@ -85,4 +85,4 @@
                      upcast-result))))))]
     [(_ f init-acc lᵢ ...)
      (with-syntax ([(argᵢ ...) (generate-temporaries #'(lᵢ ...))])
-       #'(foldr (λ (argᵢ ... arg-acc) (f argᵢ ... arg-acc)) init-acc lᵢ ...))]))
+       #'(foldl (λ (argᵢ ... arg-acc) (f argᵢ ... arg-acc)) init-acc lᵢ ...))]))
