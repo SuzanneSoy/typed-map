@@ -24,7 +24,7 @@ install:
 - raco pkg install --deps search-auto -j 2 ./typed-map/ ./typed-map-doc/ ./typed-map-lib/ ./typed-map-test/
 
 script:
-- raco test -x -p typed-map typed-map-doc typed-map-lib typed-map-test
+- raco test -p typed-map typed-map-doc typed-map-lib typed-map-test
 - raco setup --check-pkg-deps --no-zo --no-launcher --no-install --no-post-install --no-docs --pkgs typed-map typed-map-doc typed-map-lib typed-map-test
 - raco doc-coverage typed-map typed-map-doc typed-map-lib typed-map-test
 - raco cover -s main -s test -s doc -f codecov -f html -d ~/coverage . || true

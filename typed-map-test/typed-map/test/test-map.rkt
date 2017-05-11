@@ -106,7 +106,7 @@
                        (cons acc (add1 x)))
                      '()
                      '(1 2 3))
-              '(((() . 4) . 3) . 2))
+              '(((() . 2) . 3) . 4))
 
 (let ()
   (ann (foldl (λ (x acc) (cons (add1 x) acc)) '() '()) Null)
