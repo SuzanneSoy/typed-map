@@ -12,4 +12,4 @@
                  " Supports afl, un-annotated lambdas and polymorphic"
                  " functions."))
 (define version "1.0")
-(define pkg-authors '("Georges Dupéron"))
+(define pkg-authors '("Suzanne Soy"))

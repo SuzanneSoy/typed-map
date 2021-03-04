@@ -12,7 +12,7 @@
 @(require 'orig)
 
 @title{Type inference helper for @orig:map}
-@author[@author+email["Georges Dupéron" "georges.duperon@gmail.com"]]
+@author[@author+email["Suzanne Soy" "racket@suzanne.soy"]]
 
 @defmodule[typed-map]
 
