@@ -8,4 +8,4 @@
 (define build-deps '("aful"))
 (define pkg-desc "Tests for typed-map-lib")
 (define version "1.0")
-(define pkg-authors '("Suzanne Soy"))
+(define pkg-authors '(|Suzanne Soy|))
